@@ -30,6 +30,25 @@ def to_binary(number):
         dividend = quotient #updates the dividend to be the quotient for the next iteration
     return "".join(binary_digits) #joins the list of binary digits into a string and returns it
 
+url = 'https://github.com/melaniewalsh/Intro-Cultural-Analytics/raw/master/book/data/bellevue_almshouse_modified.csv'
+df_bellevue = pd.read_csv(url)
+
+#used df_bellevue['gender'].value_counts() to find the issue
+#with the gender column as outlined in the problem set
+df_bellevue['gender'].replace('?', np.nan, inplace=True) #replacing non-gender values with NaN
+df_bellevue['gender'].replace('g', np.nan, inplace=True)
+df_bellevue['gender'].replace('h', np.nan, inplace=True)
+df_bellevue['gender'].value_counts() #checking to make sure the replacements worked
+
+
+
+
+
+
+
+
+
+
 def task_i():
     '''returns a list of column names 
     sorted by ascending missing values'''
