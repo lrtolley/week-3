@@ -22,16 +22,18 @@ def to_binary(number):
     if number < 0: #prevents negative input 
       print("Input should be a positive integer.")
         return None
-    binary_digits = []
+    binary_digits = [] #starts an empty list to hold the binary digits
     dividend = number
     while dividend > 0:
-        quotient, remainder = divmod(dividend, 2) #divides the number by 2 and gets the quotient and remainder
-        binary_digits.insert(0, str(remainder)) #inserts the remainder in the frontmost position of the list
+        quotient, remainder = divmod(dividend, 2) #divides the number by 2 and gets the 
+        #quotient and remainder
+        binary_digits.insert(0, str(remainder)) #inserts the remainder in the frontmost 
+        #position of the list
         dividend = quotient #updates the dividend to be the quotient for the next iteration
     return "".join(binary_digits) #joins the list of binary digits into a string and returns it
 
 url = 'https://github.com/melaniewalsh/Intro-Cultural-Analytics/raw/master/book/data/bellevue_almshouse_modified.csv'
-df_bellevue = pd.read_csv(url)
+df_bellevue = pd.read_csv(url) #reads in the csv file from the url
 
 #used df_bellevue['gender'].value_counts() to find the issue
 #with the gender column as outlined in the problem set
@@ -45,19 +47,26 @@ def task_i1():
     sorted by ascending missing values'''
     null_counts = df_bellevue.isnull().sum() #creates a series with the count of missing values for each column
     columns_na = null_counts.sort_values(ascending = True) #sorts the series by ascending missing values
-    print(columns_na)
+    return columns_na
 
 def task_i2():
     '''creates a dataframe with the year and number of entries'''
-
+    dates_to_count = df_bellevue['year'].value_counts() #creates a series with the count of 
+    #entries for each year
+    dframe_dates = pd.DataFrame(dates_to_count) #converts the series to a dataframe
+    renamed_frame = dframe_dates.rename(columns={'count': 'total_admissions'}) #renames the count 
+    #column to total_admissions
+    return renamed_frame
 
 def task_i3():
     '''
-    return a series that indexes the gender 
+    returns a series that indexes the gender 
     and the average age for each gender
     '''
     return df_bellevue.groupby('gender')['age'].mean()
+#sorts by (corrected) genders and returns average age
 
 def task_i4():
     '''returns the top 5 most common occupations in descending order'''
     return df_bellevue['profession'].value_counts().head(5)
+    #returns top 5 professions by count
