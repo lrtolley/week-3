@@ -58,3 +58,6 @@ def task_i3():
     '''
     return df_bellevue.groupby('gender')['age'].mean()
 
+def task_i4():
+    '''returns the top 5 most common occupations in descending order'''
+    return df_bellevue['profession'].value_counts().head(5)
