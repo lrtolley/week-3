@@ -40,15 +40,21 @@ df_bellevue['gender'].replace('g', np.nan, inplace=True)
 df_bellevue['gender'].replace('h', np.nan, inplace=True)
 df_bellevue['gender'].value_counts() #checking to make sure the replacements worked
 
-
-
-
-
-
-
-
-
-
-def task_i():
+def task_i1():
     '''returns a list of column names 
     sorted by ascending missing values'''
+    null_counts = df_bellevue.isnull().sum() #creates a series with the count of missing values for each column
+    columns_na = null_counts.sort_values(ascending = True) #sorts the series by ascending missing values
+    print(columns_na)
+
+def task_i2():
+    '''creates a dataframe with the year and number of entries'''
+
+
+def task_i3():
+    '''
+    return a series that indexes the gender 
+    and the average age for each gender
+    '''
+    return df_bellevue.groupby('gender')['age'].mean()
+
