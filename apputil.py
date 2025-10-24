@@ -3,17 +3,17 @@ import pandas as pd
 import numpy as np
 
 # update/add code below ...
-def fibonacci(n):
+def fibonacci(number):
     '''Return the nth Fibonacci number.'''
-    if n <= 0: #this is to handle invalid input 
-        print("Input should be a positive integer.")
+    if n <= 0:
         return None
-    elif n == 1: #defines the first Fibonacci number
+    elif n == 1:
         return 0
-    elif n == 2: #defines the second Fibonacci number
+    elif n == 2:
         return 1
-    else: #recursive case to calculate the nth Fibonacci number above n=2
-        return fibonacci(n-1) + fibonacci(n-2) 
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)
+
 
 def to_binary(number):
     '''Converts a positive integer base 10 number to a binary number'''
