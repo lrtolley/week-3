@@ -5,26 +5,26 @@ import numpy as np
 # update/add code below ...
 def fibonacci(number):
     '''Return the nth Fibonacci number.'''
-    if n <= 0:
+    if number <= 0:
         return None
-    elif n == 1:
+    elif number == 1:
         return 0
-    elif n == 2:
+    elif number == 2:
         return 1
     else:
-        return fibonacci(n - 1) + fibonacci(n - 2)
+        return fibonacci(number - 1) + fibonacci(number - 2)
 
 
 def to_binary(number):
     '''Convert a positive integer to binary using recursion.'''
-    if n < 0:
+    if number < 0:
         return None
-    elif n == 0:
+    elif number == 0:
         return "0"
-    elif n == 1:
+    elif number == 1:
         return "1"
     else:
-        return to_binary(n // 2) + str(n % 2)
+        return to_binary(number // 2) + str(number % 2)
 
 
 url = 'https://github.com/melaniewalsh/Intro-Cultural-Analytics/raw/master/book/data/bellevue_almshouse_modified.csv'
