@@ -42,14 +42,14 @@ df_bellevue['gender'].replace('g', np.nan, inplace=True)
 df_bellevue['gender'].replace('h', np.nan, inplace=True)
 df_bellevue['gender'].value_counts() #checking to make sure the replacements worked
 
-def task_i1():
+def task_1():
     '''returns a list of column names 
     sorted by ascending missing values'''
     null_counts = df_bellevue.isnull().sum() #creates a series with the count of missing values for each column
     columns_na = null_counts.sort_values(ascending = True) #sorts the series by ascending missing values
     return columns_na
 
-def task_i2():
+def task_2():
     '''creates a dataframe with the year and number of entries'''
     df_bellevue[['year', 'month', 'day']] = df_bellevue['date_in'].str.split('-', expand=True)
     dates_to_count = df_bellevue['year'].value_counts() #creates a series with the count of 
@@ -60,7 +60,7 @@ def task_i2():
     #column to total_admissions
     return renamed_frame
 
-def task_i3():
+def task_3():
     '''
     returns a series that indexes the gender 
     and the average age for each gender
@@ -68,7 +68,7 @@ def task_i3():
     return df_bellevue.groupby('gender')['age'].mean()
 #sorts by (corrected) genders and returns average age
 
-def task_i4():
+def task_4():
     '''returns the top 5 most common occupations in descending order'''
     df_bellevue['profession'] = df_bellevue['profession'].astype(str).apply(lambda x: x.lower())
     df_bellevue['profession'] = df_bellevue['profession'].str.replace(" ", "", regex=False)
