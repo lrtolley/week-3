@@ -51,6 +51,7 @@ def task_i1():
 
 def task_i2():
     '''creates a dataframe with the year and number of entries'''
+    df_bellevue[['year', 'month', 'day']] = df_bellevue['date_in'].str.split('-', expand=True)
     dates_to_count = df_bellevue['year'].value_counts() #creates a series with the count of 
     #entries for each year
     dframe_dates = pd.DataFrame(dates_to_count) #converts the series to a dataframe
