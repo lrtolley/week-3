@@ -43,22 +43,20 @@ df_bellevue['gender'].replace('h', np.nan, inplace=True)
 df_bellevue['gender'].value_counts() #checking to make sure the replacements worked
 
 def task_1():
-    '''returns a list of column names 
-    sorted by ascending missing values'''
-    null_counts = df_bellevue.isnull().sum() #creates a series with the count of missing values for each column
-    columns_na = null_counts.sort_values(ascending = True) #sorts the series by ascending missing values
-    return columns_na
+    '''Return list of column names sorted by ascending missing values.'''
+    null_counts = df_bellevue.isnull().sum()
+    sorted_columns = null_counts.sort_values().index.tolist()
+    return sorted_columns
+
 
 def task_2():
-    '''creates a dataframe with the year and number of entries'''
+    '''Return DataFrame with year and total_admissions.'''
     df_bellevue[['year', 'month', 'day']] = df_bellevue['date_in'].str.split('-', expand=True)
-    dates_to_count = df_bellevue['year'].value_counts() #creates a series with the count of 
-    #entries for each year
-    dframe_dates = pd.DataFrame(dates_to_count) #converts the series to a dataframe
-    renamed_frame = dates_to_count.rename('total_admissions').to_frame()
-    #renames the count 
-    #column to total_admissions
-    return renamed_frame
+    year_counts = df_bellevue['year'].value_counts().sort_index()
+    result = year_counts.rename('total_admissions').reset_index()
+    result.columns = ['year', 'total_admissions']
+    return result
+
 
 def task_3():
     '''
@@ -69,11 +67,9 @@ def task_3():
 #sorts by (corrected) genders and returns average age
 
 def task_4():
-    '''returns the top 5 most common occupations in descending order'''
-    df_bellevue['profession'] = df_bellevue['profession'].astype(str).apply(lambda x: x.lower())
+    '''Return list of top 5 most common professions.'''
+    df_bellevue['profession'] = df_bellevue['profession'].astype(str).str.lower()
     df_bellevue['profession'] = df_bellevue['profession'].str.replace(" ", "", regex=False)
     df_bellevue['profession'] = df_bellevue['profession'].str.replace("-", "", regex=False)
-
-    # Get top 5 most common professions
-    sortedvalues = df_bellevue['profession'].value_counts().head(5).index.tolist()
-    return sortedvalues
+    top_5 = df_bellevue['profession'].value_counts().head(5).index.tolist()
+    return top_5
