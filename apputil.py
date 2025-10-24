@@ -69,5 +69,9 @@ def task_i3():
 
 def task_i4():
     '''returns the top 5 most common occupations in descending order'''
-    return df_bellevue['profession'].value_counts().head(5)
-    #returns top 5 professions by count
+    df_bellevue['profession'] = df_bellevue['profession'].astype(str).apply(lambda x: x.lower())
+    df_bellevue['profession'] = df_bellevue['profession'].str.replace(" ", "")
+    df_bellevue['profession'] = df_bellevue['profession'].str.replace("-", "")
+    # Get top 5 most common professions
+    sortedvalues = df_bellevue['profession'].value_counts().head(5).index.tolist()
+    return sortedvalues
