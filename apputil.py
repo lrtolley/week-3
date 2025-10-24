@@ -21,7 +21,7 @@ def to_binary(number):
         return "0"
     if number < 0: #prevents negative input 
       print("Input should be a positive integer.")
-        return None
+    return None
     binary_digits = [] #starts an empty list to hold the binary digits
     dividend = number
     while dividend > 0:
@@ -55,7 +55,8 @@ def task_i2():
     dates_to_count = df_bellevue['year'].value_counts() #creates a series with the count of 
     #entries for each year
     dframe_dates = pd.DataFrame(dates_to_count) #converts the series to a dataframe
-    renamed_frame = dframe_dates.rename(columns={'count': 'total_admissions'}) #renames the count 
+    renamed_frame = dates_to_count.rename('total_admissions').to_frame()
+    #renames the count 
     #column to total_admissions
     return renamed_frame
 
@@ -70,8 +71,9 @@ def task_i3():
 def task_i4():
     '''returns the top 5 most common occupations in descending order'''
     df_bellevue['profession'] = df_bellevue['profession'].astype(str).apply(lambda x: x.lower())
-    df_bellevue['profession'] = df_bellevue['profession'].str.replace(" ", "")
-    df_bellevue['profession'] = df_bellevue['profession'].str.replace("-", "")
+    df_bellevue['profession'] = df_bellevue['profession'].str.replace(" ", "", regex=False)
+    df_bellevue['profession'] = df_bellevue['profession'].str.replace("-", "", regex=False)
+
     # Get top 5 most common professions
     sortedvalues = df_bellevue['profession'].value_counts().head(5).index.tolist()
     return sortedvalues
